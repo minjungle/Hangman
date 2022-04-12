@@ -1,0 +1,20 @@
+.hide {
+    display: none; 
+}
+
+.controls {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+  
+}
+
+#displayGame {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
