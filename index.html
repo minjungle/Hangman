@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>HANGMAN!</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>HANGMAN!</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
+  <body>
+    <h1>Hangman!</h1>
 
-<body>
-<h1>Hangman!</h1>
+    <div id="displayGame"></div>
 
+    <!--   displaying how many lives are left.  -->
+    <section class="livesRemaining"></section>
 
+    <!--   displaying selection of letters inline. -->
 
+    <div class="letters"></div>
 
+    <section class="controls">
+      <section id="result"></section>
+      <button id="startButton">Start Game</button>
+      <button class="hide" id="restart" onclick="restartGame()">Restart</button>
+    </section>
 
-
-	<div id="displayGame"></div>
-
-
-
-<section class="controls">
-  <button id="startButton">Start Game</button>
-  <button class="hide" id="restart" onclick="restartGame()">Restart</button>
-        </section> 
-
-
-
-
-
-
-  
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
