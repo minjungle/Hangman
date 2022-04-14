@@ -1,7 +1,6 @@
 const startGame = document.getElementById("startButton");
 const endResult = document.getElementById("result");
 const livesRemaining = document.getElementById("livesRemaining");
-const reset = document.getElementById("restart");
 let numberOfGuesses = 6;
 let answerArray = [];
 
@@ -84,7 +83,6 @@ function createAlphabetButtons() {
         livesRemaining.textContent = `You have ${numberOfGuesses} lives remaining`;
         if (numberOfGuesses === 0) {
           endResult.textContent = "You Lost";
-          reset.classList.add("show");
         }
       }
 
