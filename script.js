@@ -1,6 +1,7 @@
 const startGame = document.getElementById("startButton");
 const endResult = document.getElementById("result");
-let isGameOngoing = false;
+const livesRemaining = document.getElementById("livesRemaining");
+const reset = document.getElementById("restart");
 let numberOfGuesses = 6;
 let answerArray = [];
 
@@ -14,6 +15,12 @@ let words = [
   "forloop",
   "class",
   "attribute",
+  "consolelog",
+  "document",
+  "variable",
+  "queryselector",
+  "appendchild",
+  "style",
 ];
 let word = words[Math.floor(Math.random() * words.length)];
 
@@ -46,7 +53,7 @@ let alphabet = [
   "z",
 ];
 
-function retrieveAllMatchingLetterIndex(userLetterChoice, randomWord) {
+function retrieveAllMatchingLetterIndex(userLetterChoice) {
   const matchingIndexesOfLetterChoice = word
     .split("")
     .map(function (letter, index) {
@@ -63,39 +70,31 @@ window.onload = function () {
   createAlphabetButtons();
 };
 function createAlphabetButtons() {
-  alphabet.forEach((value, index) => {
+  alphabet.forEach(function (value) {
     let button = document.createElement("button");
     button.addEventListener("click", function (ev) {
       let retrievedIndexes = retrieveAllMatchingLetterIndex(
         ev.target.outerText,
         word
       );
-      let shown = document.querySelectorAll(".show");
-      console.log(shown);
 
       if (word.includes(ev.target.outerText) === false) {
         button.disabled = true;
         numberOfGuesses--;
-        console.log(numberOfGuesses);
+        livesRemaining.textContent = `You have ${numberOfGuesses} lives remaining`;
         if (numberOfGuesses === 0) {
           endResult.textContent = "You Lost";
+          reset.classList.add("show");
         }
       }
 
-      console.log(ev.target);
-      // if player clicks on the button but incorrectly guesses the letter (the letter is not included in the element of the word array. ), disable it from being clicked further. Decrease remaining life by 1.
-      // if player clicks on a wrong letter again, takeaway another life. - loop
-      //if number of guesses exceeds 6.
-      // end game, show all letters, say you lose.
-      console.log(retrievedIndexes, word);
       document.querySelectorAll("p").forEach(function (ptag, index) {
         retrievedIndexes.forEach(function (retrievedIndex) {
           if (retrievedIndex === index) {
             ptag.classList.add("show");
             answerArray.push(ev.target.outerText);
-            console.log(isArrayEqual(answerArray, word.split("")));
             if (isArrayEqual(answerArray, word.split(""))) {
-              console.log("you Won");
+              endResult.textContent = "Winner!";
             }
           }
         });
@@ -106,35 +105,29 @@ function createAlphabetButtons() {
   });
 }
 
-// these are the indexes of letter that need to be uncovered.
-const matchingIndexes = retrieveAllMatchingLetterIndex("a", "class");
-console.log(matchingIndexes);
-
-//Adding event listener to handle player clicking on startButton.
-startGame.addEventListener("click", () => onClickStart());
-
-// When player clicks startGame, changes the game state to ongoing and generates a random word from wordlist.
-const onClickStart = () => {
+startGame.addEventListener("click", function () {
   draw(word);
-  //
-};
-/**
- *
- * @param {string} word - split into divs.
- */
+});
+
 function draw(word) {
-  word.split("").forEach((letter) => {
-    const div = underlineStrokes();
+  word.split("").forEach(function (letter) {
+    const div = createUnderlines();
     addLetterToDiv(div, letter);
     document.getElementById("displayGame").appendChild(div);
   });
 }
-const isArrayEqual = (a, b) =>
-  a.length === b.length && a.every((v, i) => v === b[i]);
+const isArrayEqual = (answerWord, generatedWord) => {
+  const hasMatchingLength = answerWord.length === generatedWord.length;
+  const hasAllLetters = answerWord.every((letter) =>
+    generatedWord.includes(letter)
+  );
+
+  const isWin = hasAllLetters && hasMatchingLength;
+  return isWin;
+};
 
 function addLetterToDiv(div, letter) {
   const p = document.createElement("p");
-  // p.classList.add('hide');
   p.style.margin = "50%";
   p.style.minHeight = "100px";
   p.textContent = letter;
@@ -142,7 +135,7 @@ function addLetterToDiv(div, letter) {
   div.appendChild(p);
 }
 
-function underlineStrokes() {
+function createUnderlines() {
   const div = document.createElement("div");
   div.style.borderBottom = "2px black solid";
   div.style.margin = "0 20px";

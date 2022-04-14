@@ -1,8 +1,14 @@
+.background {
+  background-color: linen;
+}
+
 h1 {
   margin: 0 auto;
   text-align: center;
-  font-size: 70px;
-  font-family: monospace;
+  font-size: 90px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin-top: 50px;
+  color: blueviolet;
 }
 
 .hide {
@@ -26,6 +32,7 @@ h1 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 8%;
 }
 
 .letters {
@@ -34,7 +41,6 @@ h1 {
   text-align: center;
   width: auto;
   height: 55px;
-  color: #fff;
   font-size: 100pt;
   font-family: sans-serif;
   align-items: center;
@@ -43,11 +49,15 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   margin-bottom: 10px;
-  margin-top: 30%;
+}
+
+.letters > button {
+  background-color: thistle;
+  margin-top: 5px;
 }
 
 button {
-  font-size: 30pt;
+  font-size: 20pt;
 }
 
 p {
@@ -55,7 +65,24 @@ p {
 }
 
 #result {
+  display: flex;
   font-size: 40pt;
   padding: 10px;
-  background: white;
+}
+
+#startButton {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#livesRemaining {
+  display: flex;
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
 }
